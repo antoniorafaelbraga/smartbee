@@ -20,7 +20,7 @@ dioxido_md
 amostra
 ]
   
-CREATE TABLE IF NOT EXISTS `Colmeia2_Colmeia` (
+CREATE TABLE IF NOT EXISTS `<IdColmeia>_Colmeia` (
   `amostra` integer primary key AUTO_INCREMENT,
   `temperatura` FLOAT NULL, `umidade` FLOAT NULL, `dioxido` FLOAT NULL,
   `som` FLOAT NULL, `data` VARCHAR(45) NULL,
