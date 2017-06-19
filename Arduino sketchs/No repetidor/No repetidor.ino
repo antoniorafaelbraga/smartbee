@@ -5,8 +5,8 @@
 RF24 radio(8,9);                // nRF24L01(+) radio attached using Getting Started board 
 int i = 0;
 RF24Network network(radio);      // Network uses that radio
-const uint16_t this_node = 00;    // Address of our node in Octal format ( 04,031, etc)
-const uint16_t other_node = 01;   // Address of the other node in Octal format
+const uint16_t this_node = 01;    // Address of our node in Octal format ( 04,031, etc)
+const uint16_t other_node = 00;   // Address of the other node in Octal format
 
 struct payload_t {                 // Structure of our payload
   char id[30];
@@ -17,9 +17,11 @@ struct payload_t {                 // Structure of our payload
 };
 void setup(void)
 {
-  Serial.begin(57600); 
+  Serial.begin(9600); 
   SPI.begin();
   radio.begin();
+  radio.setPALevel(RF24_PA_MAX);
+  radio.setDataRate(RF24_250KBPS); 
   network.begin(/*channel*/ 90, /*node address*/ this_node);
   
 }
@@ -48,5 +50,13 @@ void loop(void){
      Serial.print(" ");
     //Serial.print("Co2: ");
     Serial.println(payload.co2);
+
+    RF24NetworkHeader header(/*to node*/ other_node);
+    bool ok = network.write(header, &payload, sizeof(payload));
+    if (ok)
+      Serial.println("ok.");
+    else
+      Serial.println("failed.");
+    
   }
 }

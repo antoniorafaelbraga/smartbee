@@ -5,6 +5,8 @@
 #include <DHT_U.h>
 #include <RF24.h>
 
+
+
 #define DHTPIN A1       // Pino DATA do Sensor DHT.
 #define DHTTYPE DHT11   // Define o tipo do sensor utilizado DHT 11
 #define IDCOLMEIA "Colmeia1" //ID da Colmeia monitorada
