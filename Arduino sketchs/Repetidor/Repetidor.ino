@@ -3,7 +3,6 @@
 #include <SPI.h>
 
 RF24 radio(8,9);                // nRF24L01(+) radio attached using Getting Started board 
-int i = 0;
 RF24Network network(radio);      // Network uses that radio
 const uint16_t this_node = 01;    // Address of our node in Octal format ( 04,031, etc)
 const uint16_t other_node = 00;   // Address of the other node in Octal format
@@ -14,6 +13,7 @@ struct payload_t {                 // Structure of our payload
   float umidade;
   float co2;
   float som;
+  float tensao;
 };
 void setup(void)
 {
@@ -50,9 +50,11 @@ void loop(void){
      Serial.print(" ");
     //Serial.print("Co2: ");
     Serial.println(payload.co2);
+    //Serial.print("Tensao: ");
+    Serial.println(payload.tensao);
 
-    RF24NetworkHeader header(/*to node*/ other_node);
-    bool ok = network.write(header, &payload, sizeof(payload));
+    RF24NetworkHeader header_recebido(/*to node*/ other_node);
+    bool ok = network.write(header_recebido, &payload, sizeof(payload));
     if (ok)
       Serial.println("ok.");
     else
