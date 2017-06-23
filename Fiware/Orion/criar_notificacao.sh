@@ -16,7 +16,9 @@ echo "Criando Notificacao no Cygnus..."
 		"data",
 		"hora",
 		"som",
-		"dioxido"
+		"dioxido",
+		"tensaocolmeia",
+		"tensaorepetidor"
     ],
     "reference": "http://10.128.0.5:5050/notify",
     "duration": "P100Y",

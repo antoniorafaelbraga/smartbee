@@ -13,7 +13,9 @@ struct payload_t {                 // Structure of our payload
   float umidade;
   float co2;
   float som;
-  float tensao;
+  float tensaocolmeia;
+  float tensaorepetidor;
+
 };
 void setup(void)
 {
@@ -46,7 +48,9 @@ void loop(void){
      Serial.print(" ");
     //Serial.print("Co2: ");
     Serial.println(payload.co2);
-    //Serial.print("Tensao: ");
-    Serial.println(payload.tensao);
+    //Serial.print("TensaoColmeia: ");
+    Serial.println(payload.tensaocolmeia);
+    //Serial.print("TensaoRepetidor: ");
+    Serial.println(payload.tensaorepetidor);
   }
 }

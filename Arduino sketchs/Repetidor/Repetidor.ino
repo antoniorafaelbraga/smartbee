@@ -13,7 +13,9 @@ struct payload_t {                 // Structure of our payload
   float umidade;
   float co2;
   float som;
-  float tensao;
+  float tensaocolmeia;
+  float tensaorepetidor;
+
 };
 void setup(void)
 {

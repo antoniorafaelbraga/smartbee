@@ -23,7 +23,8 @@ struct paraenviar {                  // Structure of our payload
   float umidade;
   float co2;
   float som;
-  float tensao;
+  float tensaocolmeia;
+  float tensaorepetidor;
 };
 float temperatura_lida = 0;
 float umidade_lida = 0;
@@ -82,7 +83,8 @@ void loop() {
   payload.umidade = umidade_lida;
   payload.som = som_lido;
   payload.co2 = co2_lido;
-  payload.tensao = tensao_lida;
+  payload.tensaocolmeia = tensao_lida;
+  payload.tensaorepetidor = 0;
 
   RF24NetworkHeader header(/*to node*/ other_node);
   bool ok = network.write(header, &payload, sizeof(payload));

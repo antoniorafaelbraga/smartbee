@@ -155,19 +155,32 @@ class Daemon(object):
 				data1 = open('/etc/smartbee/json.json','r')
 				data = data1.read()
 				data1.close()
-			
-				#Alterar o atributos principais
-				data = data.replace('$1', valores[0])
-				data = data.replace('$2', valores[1])
-				data = data.replace('$3', valores[2])
-				data = data.replace('$4', valores[3])
+				
 				#Obter data e hora
 				a = datetime.datetime.now()
 				data_atual = str(a.strftime('%d/%m/%y'))
 				hora = str(a.strftime('%H:%M:%S'))
-				data = data.replace("$5", data_atual)
+				
+				#Alterar o atributos principais do JSON
+				#IdColmeia
+				data = data.replace('$1', valores[0])
+				#Temperatura				
+				data = data.replace('$2', valores[1])
+				#Umidade
+				data = data.replace('$3', valores[2])
+				#Som
+				data = data.replace('$4', valores[3])
+				#Data
+				data = data.replace('$5', data_atual)
+				#Hora
 				data = data.replace('$6', hora)
-			
+				#Co2
+				data = data.replace('$7', valores[4])
+				#TensaoColmeia
+				data = data.replace('$8', valores[5])
+				#TensaoRepetidor
+				data = data.replace('$9', valores[6])
+				
 				#Consertando erros no arquivo JSON
 				data = json.dumps(data)
 				data = data.replace('\\n', '')

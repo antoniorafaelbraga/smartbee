@@ -1,7 +1,7 @@
 #!/bin/bash
 #Script tem que receber 5 parametros, senão não executará
-if [ $# -lt 7 ]; then
-   echo "./criar_entidade [id] [tipo] [temperatura] [umidade] [som] [data] [hora] [co2]"
+if [ $# -lt 9 ]; then
+   echo "./criar_entidade [id] [tipo] [temperatura] [umidade] [som] [data] [hora] [co2] [tensaocolmeia] [tensaorepetidor]"
    exit 1
 fi
 
@@ -43,6 +43,16 @@ fi
                     "name": "dioxido",
                     "type": "float",
                     "value": "$8"
+                },
+				{
+                    "name": "tensaocolmeia",
+                    "type": "float",
+                    "value": "$9"
+                },
+				{
+                    "name": "tensaorepetidor",
+                    "type": "float",
+                    "value": "$10"
                 }
             ]
         }
