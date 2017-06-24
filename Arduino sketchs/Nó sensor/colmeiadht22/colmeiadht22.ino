@@ -1,13 +1,12 @@
 #include <JeeLib.h>
 #include <RF24Network.h>
-#include <SPI.h>
 #include <DHT.h>
 #include <RF24.h>
 
-#define DHTPIN 1       // Pino DATA do Sensor DHT.
+#define DHTPIN A2       // Pino DATA do Sensor DHT.
 #define DHTTYPE DHT22   // Define o tipo do sensor utilizado DHT 11
 #define IDCOLMEIA "Colmeia2" //ID da Colmeia monitorada
-#define TEMPOENTRECADALEITURA 10000 //Tempo entre cada leitura 
+#define TEMPOENTRECADALEITURA 2000 //Tempo entre cada leitura 
 
 DHT dht(DHTPIN, DHTTYPE); //Objeto do sensor de temperatura
 
@@ -34,7 +33,7 @@ float tensao_lida = 0;
 
 int SENSORSOM = A0;
 //int SENSORCO2 = 0;
-int SENSORTENSAO = A2;
+int SENSORTENSAO = A4;
 int led = 13;
 
 ISR(WDT_vect) { Sleepy::watchdogEvent(); }
@@ -56,18 +55,17 @@ void lerMQandKy(){
 
 void lerTensao(){
   float valor_lido_tensao = analogRead(SENSORTENSAO);
-  tensao_lida=((valor_lido_tensao*0.004887586)*4.62);
+  tensao_lida=((valor_lido_tensao*0.004887586)*4.65);
 }
 void setup(void)
 {
   Serial.begin(57600);
   digitalWrite(led, LOW);
   dht.begin();                           // Inicializa a classe do sensor
-
-  SPI.begin();
   radio.begin();
   radio.stopListening();
   radio.setPALevel(RF24_PA_MAX); 
+  radio.setDataRate(RF24_250KBPS);
   //The possibilities are: RF24_PA_MIN, RF24_PA_LOW, RF24_PA_HIGH and RF24_PA_MAX
   network.begin(/*channel*/ 90, /*node address*/ this_node);
 }
@@ -76,7 +74,8 @@ void loop() {
 
   network.update();
   lerDHT();   
-  lerMQandKy();                 
+  lerMQandKy();
+  lerTensao();                 
   struct paraenviar payload;
   strcpy( payload.id, IDCOLMEIA);
   payload.temperatura = temperatura_lida;
@@ -86,13 +85,16 @@ void loop() {
   payload.tensaocolmeia = tensao_lida;
   payload.tensaorepetidor = 0;
 
+  Serial.println(tensao_lida);
+
   RF24NetworkHeader header(/*to node*/ other_node);
   bool ok = network.write(header, &payload, sizeof(payload));
   if (ok)
-    Serial.println("ok.");
+    Serial.println("ok");
   else
-    Serial.println("failed.");
+    Serial.println("error sending");
 
+  
   float temperatura_lida = 0;
   float umidade_lida = 0;
   float co2_lido = 0;
