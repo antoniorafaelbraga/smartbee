@@ -239,6 +239,8 @@ class Daemon(object):
 	porta = "/dev/ttyACM0"
 
 	velocidade = 57600
+	COLMEIA1='ODQHRWU1WIPGH2CK'
+	COLMEIA2='Z63X9L46JZFPDUWZ'
 
 	urlFiware = "http://35.184.233.148:1026/v1/updateContext"
 
@@ -349,15 +351,24 @@ class Daemon(object):
 				data = data.replace('}\"', '}')
 
 				status_requisicao = ''
-
+				
+				#ENVIANDO REQUISICAO PARA THINKSPEAK
+				id_key='';
+				if (valores[0] == 'Colmeia1'):
+					id_key = COLMEIA1
+				elif (valores[0] == 'Colmeia2'):			
+					id_key = COLMEIA2
+					
+					
 						
 				with open('/etc/smartbee/leituras.txt', 'a') as arq:
 
 					arq.write(leitura+'\n')
-
 			
 				try:
 					r = requests.post(urlFiware, headers=headers, data=data)
+					url="https://api.thingspeak.com/update?api_key=%s&field1=%s&field2=%s&field3=%s&field4=%s&field5=%s&field6=%s" %(id_key,valores[1], valores[2], valores[3], valores[4], valores[5], valores[6])
+					r = requests.get(url)
 				except urllib3.connection.HTTPConnection as err:
 					with open('/var/log/smartbee/smartbee_err.log', 'a') as arq:
 			                        arq.write(str(err)+'\n')
