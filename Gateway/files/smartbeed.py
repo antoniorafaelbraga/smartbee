@@ -359,7 +359,6 @@ class Daemon(object):
 				elif (valores[0] == 'Colmeia2'):			
 					id_key = COLMEIA2
 					
-					
 						
 				with open('/etc/smartbee/leituras.txt', 'a') as arq:
 
