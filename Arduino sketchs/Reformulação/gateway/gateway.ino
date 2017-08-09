@@ -31,7 +31,6 @@ String getValue(String data, char separator, int index)
 void setup(void)
 {
   Serial.begin(57600);
-  Serial.println("Receptor");
  
   SPI.begin();
   radio.begin();
@@ -73,8 +72,11 @@ void loop(void){
     //Serial.print("Co2: ");
     Serial.print(co2);
     Serial.print(" ");
-    //Serial.print("Tensao: ");
-    Serial.println(tensaorepetidor2);    
+    //Serial.print("Tensao sensor: ");
+    Serial.println(tensaosensor1)
+    Serial.print(" ");
+    //Serial.print("Tensao repetidor: "); 
+    Serial.println(tensaorepetidor2);   
   }
 }
 
