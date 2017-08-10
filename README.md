@@ -7,20 +7,22 @@ Requirements
 
 For the sensors nodes:
 
-asdf.
+asdf
 
-asdf.
+asdf
 
-asdf.
+asdf
 
 For the repeaters nodes:
 
 qwer
+
 qwer
 
 For gateway:
 
 asdf
+
 asfd
 
 Building/Installation
