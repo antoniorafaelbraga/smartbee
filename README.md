@@ -8,7 +8,9 @@ Requirements
 For the sensors nodes:
 
 asdf.
+
 asdf.
+
 asdf.
 
 For the repeaters nodes:
