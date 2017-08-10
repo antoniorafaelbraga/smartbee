@@ -1,4 +1,4 @@
-# Sm@rtBee: Monitoring of Healthy Beehives to Describe the Behavior of Pollinators Bee
+# Sm@rtBee
 
 Se você desejar deixar o script do gateway executando no BeagleBone, não precisa fazer os passos abaixo, pule para a etapa 2
 
