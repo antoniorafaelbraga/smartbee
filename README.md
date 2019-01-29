@@ -1,6 +1,12 @@
 # Sm@rtBee
 
-The main objective of this project is to describe the behavior of bees in healthy hives and ready for pollination. Through real-time and minimally invasive monitoring, data from hives and colonies will be collected through heterogeneous sensors, connected to sensing devices with embedded radios. The data will be stored in a computational cloud and accessed remotely via the Web.
+The main objective of this project is to describe the 
+behavior of bees in healthy hives and ready for pollination. 
+Through real-time and minimally invasive monitoring, 
+data from hives and colonies will be collected through 
+heterogeneous sensors, connected to sensing devices with 
+embedded radios. The data will be stored in a computational 
+cloud and accessed remotely via the Web.
 
 Requirements
 --------------

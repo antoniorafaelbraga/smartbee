@@ -1,18 +1,21 @@
-
 #Descobrir onde está rodando o programa do R e colocar seus dados nesse mesmo diretorio
-getwd()
+#getwd()
 
-# importando aquivo (que voce colocou no diretorio acima) 
-#com os dados a serem pre-processados
-data <- read.csv("emil_1estacao.csv", header=TRUE)
-mydata <- subset( data, select = c(date,Month, hive_weight,hive_temperature,hive_humidity, 
-                                   ambient_temperature,ambient_humidity ))
-mydata_preditors <- subset( mydata, select = c(hive_weight,hive_temperature,hive_humidity, 
-                                               ambient_temperature,ambient_humidity ))
+# importando aquivo (que voce colocou no diretorio acima) com os dados a serem pre-processados;
+# Não esquecer de adicionar permissão de execução no arquivo de dados;
 
+#Date,D1,D2,D3,Week,Month,Year,Temp-Btm(F),Temp-Brood(F),Temp-Hive(F),BRH(%),HRH(%),Weight(lbs)
+data <- read.csv("/home/rafaelbraga/PycharmProjects/smartbee/Data/pre-processing/HT101_original.csv", header=TRUE)
+mydata <- subset(
+            data,
+            select = c(Date, Month, brood_temperature, hive_weight, hive_temperature, hive_humidity, ambient_temperature, ambient_humidity))
 
+# comment
+mydata_preditors <- subset(
+            mydata,
+            select = c(hive_weight, hive_temperature, hive_humidity, ambient_temperature, ambient_humidity))
 
-#Instalação de todos os pacotes
+#Instalação de pacotes
 
 #Pacote para função skweness
 install.packages("moments")
@@ -26,8 +29,6 @@ install.packages("ggplot2")
 install.packages("ggfortify")
 install.packages("factoextra")
 install.packages("mlbench")
-
-
 
 #*************************** Análise Exploratória dos dados ***************************
 #Histogramas
@@ -96,7 +97,8 @@ dfNorm
 
 #***************************Detectando e Retirando os outliers***************************
 #Boxplot
-boxplot(mydata_preditors, horizontal=TRUE)
+#boxplot(mydata_preditors, horizontal=TRUE)
+boxplot(mydata_preditors)
 
 #Para um conjunto de dados contínuos os outliers são definido por aqueles fora da faixa de valores do
 #75th and 25th quartile
@@ -131,7 +133,8 @@ x
 quantile(x)
 
 #Retira os outliers da plotagem dos bloxpot com (outline = FALSE)
-boxplot(mydata_preditors,horizontal=TRUE,axes=FALSE,outline=FALSE)
+#boxplot(mydata_preditors,horizontal=TRUE,axes=FALSE,outline=FALSE)
+boxplot(mydata_preditors,outline=FALSE)
 
 #Usando z-escore
 library('outliers')
